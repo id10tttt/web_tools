@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-inherit="web.CustomFilterItem" t-inherit-mode="extension" owl="1">
+        <xpath expr="//select[contains(@class, 'o_generator_menu_field')]" position="replace">
+            <select class="o_input o_generator_menu_field selectpicker"
+                    data-live-search="true"
+                    style="display: block !important;"
+                    t-on-change="onFieldSelect(condition)"
+            >
+
+                <option t-foreach="fields" t-as="field" t-key="field_index"
+                        t-att-value="field.name"
+                        t-att-selected="field_index === condition.field"
+                        t-esc="field.string"
+                />
+            </select>
+            <script type="text/javascript">
+               $('.o_generator_menu_field').selectpicker()
+            </script>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,23 @@
+.bootstrap-select {
+    width: 100% !important; /* 覆盖默认宽度 */
+    padding: 0 4px 0 7px;
+}
+
+.bootstrap-select .dropdown-menu {
+    // overflow-y: auto; /* 控制下拉菜单的滚动 */
+    // max-width: 300px !important;
+    max-height: 300px !important; /* 设置下拉菜单的最大高度 */  
+    left: -4px !important;
+    position: relative !important;
+}
+
+.bootstrap-select .dropdown-toggle{
+    padding: 0 !important;
+    background: #fff;
+ }
+
+ .dropright .dropdown-menu{
+    // width: 400px !important;
+    // height: 340px !important;
+    // transform: translate3d(-24px, 24px, 0px) !important;
+ }
