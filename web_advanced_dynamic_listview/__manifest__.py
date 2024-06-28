@@ -52,15 +52,15 @@
     'support': 'dgqcjx@gmail.com',
     "assets": {
         'web.assets_qweb': [
-            'web_adv_listview/static/src/xml/listview_button_view.xml',
-            'web_adv_listview/static/src/xml/custom_filter_item.xml',
+            'web_advanced_dynamic_listview/static/src/xml/listview_button_view.xml',
+            'web_advanced_dynamic_listview/static/src/xml/custom_filter_item.xml',
         ],
         'web.assets_backend': [
-            'web_adv_listview/static/src/lib/bootstrap-select/bootstrap-select.min.css',
-            'web_adv_listview/static/src/lib/bootstrap-select/bootstrap-select.min.js',
-            'web_adv_listview/static/src/js/*.js',
-            'web_adv_listview/static/src/scss/dynamic_list.scss',
-            'web_adv_listview/static/src/scss/custom_filter_item.scss',
+            'web_advanced_dynamic_listview/static/src/lib/bootstrap-select/bootstrap-select.min.css',
+            'web_advanced_dynamic_listview/static/src/lib/bootstrap-select/bootstrap-select.min.js',
+            'web_advanced_dynamic_listview/static/src/js/*.js',
+            'web_advanced_dynamic_listview/static/src/scss/dynamic_list.scss',
+            'web_advanced_dynamic_listview/static/src/scss/custom_filter_item.scss',
         ],
     },
     'demo': [],
