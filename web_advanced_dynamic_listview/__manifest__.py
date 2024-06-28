@@ -69,5 +69,5 @@
     'installable': True,
     'application': True,
     'auto_install': False,
-    'license': 'Other proprietary'
+    'license': 'AGPL-3'
 }
