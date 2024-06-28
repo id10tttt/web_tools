@@ -32,7 +32,7 @@
 ###############################################################################
 
 {
-    'name': 'Web Dynamic List',
+    'name': 'Web Advanced Dynamic List',
     'author': '1di0t',
     'category': 'ListView',
     'summary': 'Advanced/Dynamic List View',
@@ -52,15 +52,15 @@
     'support': 'dgqcjx@gmail.com',
     "assets": {
         'web.assets_qweb': [
-            'web_dynamic_list/static/src/xml/listview_button_view.xml',
-            'web_dynamic_list/static/src/xml/custom_filter_item.xml',
+            'web_adv_listview/static/src/xml/listview_button_view.xml',
+            'web_adv_listview/static/src/xml/custom_filter_item.xml',
         ],
         'web.assets_backend': [
-            'web_dynamic_list/static/src/lib/bootstrap-select/bootstrap-select.min.css',
-            'web_dynamic_list/static/src/lib/bootstrap-select/bootstrap-select.min.js',
-            'web_dynamic_list/static/src/js/*.js',
-            'web_dynamic_list/static/src/scss/dynamic_list.scss',
-            'web_dynamic_list/static/src/scss/custom_filter_item.scss',
+            'web_adv_listview/static/src/lib/bootstrap-select/bootstrap-select.min.css',
+            'web_adv_listview/static/src/lib/bootstrap-select/bootstrap-select.min.js',
+            'web_adv_listview/static/src/js/*.js',
+            'web_adv_listview/static/src/scss/dynamic_list.scss',
+            'web_adv_listview/static/src/scss/custom_filter_item.scss',
         ],
     },
     'demo': [],

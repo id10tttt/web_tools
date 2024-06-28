@@ -1,4 +1,4 @@
-odoo.define('web_dynamic_list.custom_adv_list_view', function (require) {
+odoo.define('web_adv_listview.custom_adv_list_view', function (require) {
     "use strict";
     //    const { useService } = require("@web/core/utils/hooks");
     var core = require('web.core');
