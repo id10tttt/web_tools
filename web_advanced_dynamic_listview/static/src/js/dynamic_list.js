@@ -76,93 +76,95 @@ odoo.define('web_advanced_dynamic_listview.custom_adv_list_view', function (requ
                 // 拖拽项
                 setTimeout(() => {
                     const draggableId = document.getElementById('draggableId');
-                    var draging = null;
-                    //使用事件委托，将li的事件委托给ul
-                    draggableId.ondragstart = function (event) {
-                        //console.log("start");
-                        //firefox设置了setData后元素才能拖动！！！！
-                        //event.target出发事件的元素
-                        event.dataTransfer.setData("te", event.target.innerText); //不能使用text，firefox会打开新tab
-                        //event.dataTransfer.setData("self", event.target);
-                        draging = event.target;
-                    }
-                    draggableId.ondragover = function (event) {
-                        //console.log("onDrop over");
-                        //取消默认行为
-                        event.preventDefault();
-                        var target = event.target;
-                        //因为dragover会发生在ul上，所以要判断是不是li
-                        if (target.nodeName === "LI") {
-                            if (target !== draging) {
-                                //getBoundingClientRect()用于获取某个元素相对于视窗的位置集合
-                                var targetRect = target.getBoundingClientRect();
-                                var dragingRect = draging.getBoundingClientRect();
-                                if (target) {
-                                    if (target.animated) {
-                                        return;
+                    if(draggableId){
+                        var draging = null;
+                        //使用事件委托，将li的事件委托给ul
+                        draggableId.ondragstart = function (event) {
+                            //console.log("start");
+                            //firefox设置了setData后元素才能拖动！！！！
+                            //event.target出发事件的元素
+                            event.dataTransfer.setData("te", event.target.innerText); //不能使用text，firefox会打开新tab
+                            //event.dataTransfer.setData("self", event.target);
+                            draging = event.target;
+                        }
+                        draggableId.ondragover = function (event) {
+                            //console.log("onDrop over");
+                            //取消默认行为
+                            event.preventDefault();
+                            var target = event.target;
+                            //因为dragover会发生在ul上，所以要判断是不是li
+                            if (target.nodeName === "LI") {
+                                if (target !== draging) {
+                                    //getBoundingClientRect()用于获取某个元素相对于视窗的位置集合
+                                    var targetRect = target.getBoundingClientRect();
+                                    var dragingRect = draging.getBoundingClientRect();
+                                    if (target) {
+                                        if (target.animated) {
+                                            return;
+                                        }
                                     }
+                                    if (_index(draging) < _index(target)) {
+                                        //nextSibling 属性可返回某个元素之后紧跟的节点（处于同一树层级中）。
+                                        target.parentNode.insertBefore(draging, target.nextSibling);
+                                    } else {
+                                        target.parentNode.insertBefore(draging, target);
+                                    }
+                                    _animate(dragingRect, draging);
+                                    _animate(targetRect, target);
                                 }
-                                if (_index(draging) < _index(target)) {
-                                    //nextSibling 属性可返回某个元素之后紧跟的节点（处于同一树层级中）。
-                                    target.parentNode.insertBefore(draging, target.nextSibling);
-                                } else {
-                                    target.parentNode.insertBefore(draging, target);
-                                }
-                                _animate(dragingRect, draging);
-                                _animate(targetRect, target);
                             }
                         }
-                    }
-                    //获取元素在父元素中的index
-                    function _index(el) {
-                        var index = 0;
 
-                        if (!el || !el.parentNode) {
-                            return -1;
-                        }
-                        //previousElementSibling属性返回指定元素的前一个兄弟元素（相同节点树层中的前一个元素节点）。
-                        while (el && (el = el.previousElementSibling)) {
-                            //console.log(el);
-                            index++;
-                        }
+                        //获取元素在父元素中的index
+                        function _index(el) {
+                            var index = 0;
 
-                        return index;
-                    }
-
-                    function _animate(prevRect, target) {
-                        var ms = 300;
-
-                        if (ms) {
-                            var currentRect = target.getBoundingClientRect();
-                            //nodeType 属性返回以数字值返回指定节点的节点类型。1=元素节点  2=属性节点
-                            if (prevRect.nodeType === 1) {
-                                prevRect = prevRect.getBoundingClientRect();
+                            if (!el || !el.parentNode) {
+                                return -1;
                             }
-                            _css(target, 'transition', 'none');
-                            _css(target, 'transform', 'translate3d(' +
-                                (prevRect.left - currentRect.left) + 'px,' +
-                                (prevRect.top - currentRect.top) + 'px,0)'
-                            );
+                            //previousElementSibling属性返回指定元素的前一个兄弟元素（相同节点树层中的前一个元素节点）。
+                            while (el && (el = el.previousElementSibling)) {
+                                //console.log(el);
+                                index++;
+                            }
 
-                            target.offsetWidth; // 触发重绘
-                            //放在timeout里面也可以
-                            // setTimeout(function() {
-                            //     _css(target, 'transition', 'all ' + ms + 'ms');
-                            //     _css(target, 'transform', 'translate3d(0,0,0)');
-                            // }, 0);
-                            _css(target, 'transition', 'all ' + ms + 'ms');
-                            _css(target, 'transform', 'translate3d(0,0,0)');
-
-                            clearTimeout(target.animated);
-                            target.animated = setTimeout(function () {
-                                _css(target, 'transition', '');
-                                _css(target, 'transform', '');
-                                target.animated = false;
-                            }, ms);
+                            return index;
                         }
-                    }
-                    //给元素添加style
-                    function _css(el, prop, val) {
+
+                        function _animate(prevRect, target) {
+                            var ms = 300;
+
+                            if (ms) {
+                                var currentRect = target.getBoundingClientRect();
+                                //nodeType 属性返回以数字值返回指定节点的节点类型。1=元素节点  2=属性节点
+                                if (prevRect.nodeType === 1) {
+                                    prevRect = prevRect.getBoundingClientRect();
+                                }
+                                _css(target, 'transition', 'none');
+                                _css(target, 'transform', 'translate3d(' +
+                                    (prevRect.left - currentRect.left) + 'px,' +
+                                    (prevRect.top - currentRect.top) + 'px,0)'
+                                );
+
+                                target.offsetWidth; // 触发重绘
+                                //放在timeout里面也可以
+                                // setTimeout(function() {
+                                //     _css(target, 'transition', 'all ' + ms + 'ms');
+                                //     _css(target, 'transform', 'translate3d(0,0,0)');
+                                // }, 0);
+                                _css(target, 'transition', 'all ' + ms + 'ms');
+                                _css(target, 'transform', 'translate3d(0,0,0)');
+
+                                clearTimeout(target.animated);
+                                target.animated = setTimeout(function () {
+                                    _css(target, 'transition', '');
+                                    _css(target, 'transform', '');
+                                    target.animated = false;
+                                }, ms);
+                            }
+                        }
+                        //给元素添加style
+                        function _css(el, prop, val) {
                         var style = el && el.style;
 
                         if (style) {
@@ -183,6 +185,7 @@ odoo.define('web_advanced_dynamic_listview.custom_adv_list_view', function (requ
                                 style[prop] = val + (typeof val === 'string' ? '' : 'px');
                             }
                         }
+                    }
                     }
                 }, 300);
             }
