@@ -36,6 +36,7 @@
     'author': '1di0t',
     'category': 'ListView',
     'summary': 'Advanced/Dynamic List View',
+    'website': 'https://github.com/id10tttt/web_tools',
     'description': """
     1. You can dynamic set columns by yourself in tree view. 
     2. You can search the fields name and drag the fields. 
